@@ -2,14 +2,16 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
+
+# Get data from github (local is boring)
 @st.cache
-def get_UN_data():
-    AWS_BUCKET_URL = "https://streamlit-demo-data.s3-us-west-2.amazonaws.com"
-    df = pd.read_csv(AWS_BUCKET_URL + "/agri.csv.gz")
-    return df.set_index("Region")
+def get_iris_data():
+    url = 'https://raw.githubusercontent.com/maxistaebler/streamlit/master/input/iris.csv'
+    df = pd.read_csv(url)
+    return df
 
 try:
-    df = get_UN_data()
+    df = get_iris_data()
 except urllib.error.URLError as e:
     st.error(
         """
@@ -20,6 +22,8 @@ except urllib.error.URLError as e:
         % e.reason
     )
     return
+
+
 
 countries = st.multiselect(
     "Choose countries", list(df.index), ["China", "United States of America"]
