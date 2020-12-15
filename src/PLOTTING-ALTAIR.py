@@ -1,4 +1,3 @@
-# %%
 import altair as alt
 import pandas as pd
 
@@ -13,4 +12,3 @@ alt.Chart(source).mark_bar().encode(
     x='a',
     y='b'
 )
-# %%
